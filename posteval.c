@@ -7,29 +7,16 @@
 int top=-1;
 int stack[n];
 
-char pop()
+int pop()
 {	
-	char t; 
+	int t; 
 	t=stack[top];
 	stack[top]=-1;
 	top--;
 	return t;
 }
 
-int isoperator(char symb)
-{
-	if(symb=='+' || symb=='*' || symb=='/' || symb=='-')
-	{
-		return 1;
-	}
-	
-	else
-	{
-		return 0;
-	}
-}
-
-void push(char val)
+void push(int val)
 {
 	top++;
 	stack[top]=val;
@@ -66,33 +53,30 @@ int operations(char symb,int a,int b)
 	}
 }
 
+
 void main()
 {
 	char exp[100];
-	int z,w,i,g,h;
-	char x,y;
+	char *ptr;
+	int w,x,y,z;
 	printf("\n ENTER EXPRESSION ");
-	fgets(exp,sizeof(exp),stdin);
-	for(i=0;exp[i]!='\0';i++)
-	{
-		if(isalnum(exp[i]))
-		{
-			push(exp[i]);
-		}
-		
-		else 
-		{
-			x=pop();
-			y=pop();
-			g=atoi(x);
-			h=atoi(y);
-			z=operations(exp[i],g,h);
-			push(itoa(z));
-		}
-	}
-	w=pop();
-	printf("%d",w);
+	scanf("%s",exp);
+	ptr=exp;
+	while(*ptr != '\0')
+    	{
+        	if(isdigit(*ptr))
+        	{
+        	    w= *ptr - 48;
+        	    push(w);
+        	}
+        	else
+        	{
+        	    x = pop();
+        	    y = pop();
+        	    z=operations(*ptr,x,y);
+        	    push(z);
+        	}
+        	ptr++;
+        }
+        printf("The result is %d",pop());
 }
-			
-			
-			
