@@ -73,7 +73,7 @@ void main()
         	{
         	    x = pop();
         	    y = pop();
-        	    z=operations(*ptr,x,y);
+        	    z=operations(*ptr,y,x);
         	    push(z);
         	}
         	ptr++;
